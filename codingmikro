@@ -1,0 +1,69 @@
+char t;
+
+void setup() {
+  pinMode(12, OUTPUT); // input untuk roda roda kanan maju
+  pinMode(11, OUTPUT); // input untuk roda roda kiri maju
+  pinMode(10, OUTPUT); // input untuk roda roda kanan mundur
+  pinMode(9, OUTPUT); // input untuk roda roda kiri mundur
+  pinMode(8, OUTPUT);  //Led
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available()) {
+    t = Serial.read();
+    Serial.println(t);
+  }
+
+  if (t == 'F') {  // MAJU
+    //kanan
+    digitalWrite(12, HIGH);
+    digitalWrite(10, LOW);
+    //kiri
+    digitalWrite(11, HIGH);
+    digitalWrite(9, LOW);
+  }
+
+  if (t == 'B') {  // MUNDUR
+    //kanan
+    digitalWrite(12, LOW);
+    digitalWrite(10, HIGH);
+    //kiri
+    digitalWrite(11, LOW);
+    digitalWrite(9, HIGH);
+  }
+
+  if (t == 'R') {  //BELOK KANAN
+    //kanan
+    digitalWrite(12, LOW);
+    digitalWrite(10, LOW);
+    //kiri
+    digitalWrite(11, HIGH);
+    digitalWrite(9, LOW);
+  }
+
+  if (t == 'L') {  //BELOK KIRI
+    //kanan
+    digitalWrite(12, HIGH);
+    digitalWrite(10, LOW);
+    //kiri
+    digitalWrite(11, LOW);
+    digitalWrite(9, LOW);
+  }
+  if (t == 'W') {
+    digitalWrite(8, HIGH);
+  }
+  if (t == 'w') {
+    digitalWrite(8, LOW);
+  }
+  if (t == 'S') {
+    //kanan
+    digitalWrite(12, LOW);
+    digitalWrite(10, LOW);
+    //kiri
+    digitalWrite(11, LOW);
+    digitalWrite(9, LOW);
+  }
+
+  delay(100);
+}
